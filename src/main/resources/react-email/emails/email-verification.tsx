@@ -55,7 +55,7 @@ export const EmailVerification = () => (
                 We're almost done, you just need to verify your email address
                 using the code below to activate your Pricetra account.
               </Text>
-              <Text className="text-2xl mt-5 text-center tracking-[20px] bg-gray-100 p-5 rounded-lg font-bold">
+              <Text className="text-2xl mt-5 text-center indent-[20px] tracking-[20px] bg-gray-100 p-5 rounded-lg font-bold">
                 {`{{code}}`}
               </Text>
             </Section>
