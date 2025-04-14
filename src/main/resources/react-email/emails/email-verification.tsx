@@ -16,36 +16,18 @@ import React from "react";
 
 export const EmailVerification = () => (
   <Html>
-    <Head>
-      <style>{`
-        @media (prefers-color-scheme: light) {
-          .light {
-            display: block !important;
-          }
-          .dark {
-            display: none !important;
-          }
-        }
-      `}</style>
-    </Head>
+    <Head />
     <Preview>Your verification code is {`{{code}}`}</Preview>
     <Body style={main}>
       <Tailwind>
         <Container className="my-10 mx-auto py-10 px-5 bg-white max-w-[450px] rounded-lg">
           <Section className="px-12">
-            <Section className="flex items-center justify-center text-center">
+            <Section className="text-center">
               <Img
-                src="https://res.cloudinary.com/pricetra-cdn/image/upload/v1743137791/logotype_black_color_cckqyj.png"
-                width="180"
+                src="https://res.cloudinary.com/pricetra-cdn/image/upload/v1744669949/My%20Brand/logo_icon_blue%40300.png"
+                width="60"
                 alt="Pricetra"
-                className="light"
-              />
-              <Img
-                src="https://res.cloudinary.com/pricetra-cdn/image/upload/v1744403096/logotype_white_color_cckqyj.png"
-                width="180"
-                alt="Pricetra"
-                className="dark"
-                style={{ display: "none" }}
+                className="mx-auto"
               />
             </Section>
             <Hr className="border-gray-200 mt-8 mb-2" />
