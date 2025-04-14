@@ -8,6 +8,7 @@ class EmailServerApplicationTests {
 
 	@Test
 	void contextLoads() {
+		assert(true);
 	}
 
 }
