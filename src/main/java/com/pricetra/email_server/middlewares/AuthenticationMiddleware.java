@@ -32,6 +32,11 @@ public class AuthenticationMiddleware extends OncePerRequestFilter {
     protected void doFilterInternal(@NonNull HttpServletRequest request,
                                     @NonNull HttpServletResponse response,
                                     @NonNull FilterChain filterChain) throws ServletException, IOException {
+        if (System.getenv("ENV").equals("development")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         final String authHeader = request.getHeader("Authorization");
         if (authHeader == null) throw new ServletException("unauthorized");
 
