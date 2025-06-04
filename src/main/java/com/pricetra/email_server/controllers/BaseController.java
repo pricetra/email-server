@@ -16,6 +16,7 @@ import java.nio.charset.StandardCharsets;
 
 public class BaseController {
     protected final SendGrid sg = new SendGrid(System.getenv("SENDGRID_API_KEY"));
+    protected final String noReplyEmail = "no-reply@pricetra.com";
 
     public Mail newHtmlMailer(String fromEmail, String recipientEmail, String subject, String html) {
         Email from = new Email(fromEmail, "Pricetra");
@@ -32,11 +33,9 @@ public class BaseController {
         return sg.api(request);
     }
 
-    public String emailVerificationTemplate(EmailVerificationRequest data) throws IOException {
+    public String getTemplateAsString(String templateFileName) throws IOException {
         Charset charset = StandardCharsets.UTF_8;
-        return new ClassPathResource("email-templates/email-verification.html")
-                .getContentAsString(charset)
-                .replace("{{code}}", data.code)
-                .replace("{{name}}", data.name);
+        return new ClassPathResource("email-templates/" + templateFileName)
+                .getContentAsString(charset);
     }
 }

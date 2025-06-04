@@ -15,8 +15,10 @@ import java.io.IOException;
 public class EmailVerificationController extends BaseController {
     @PostMapping("/email-verification")
     public EmailResponse sendEmailVerificationCode(@RequestBody EmailVerificationRequest params) throws IOException {
-        String html = this.emailVerificationTemplate(params);
-        Mail mail = this.newHtmlMailer("no-reply@pricetra.com", params.recipientEmail, "Email Verification Code", html);
+        String html = getTemplateAsString("email-verification.html")
+                .replace("{{code}}", params.code)
+                .replace("{{name}}", params.name);
+        Mail mail = this.newHtmlMailer(noReplyEmail, params.recipientEmail, "Email Verification Code", html);
 
         Response emailResponse = sendEmail(mail);
         EmailVerificationResponse res = new EmailVerificationResponse();
