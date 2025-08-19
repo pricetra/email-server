@@ -1,40 +1,31 @@
-HELP.md
-.gradle
-build/
-!gradle/wrapper/gradle-wrapper.jar
-!**/src/main/**/build/
-!**/src/test/**/build/
+# Compiled Elixir/Phoenix artifacts
+_build/
+priv/static/cache_manifest.json
+tmp/
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-bin/
-!**/src/main/**/bin/
-!**/src/test/**/bin/
+# Elixir dependencies
+deps/
 
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
-out/
-!**/src/main/**/out/
-!**/src/test/**/out/
+# Test coverage reports
+cover/
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
+# Generated documentation
+doc/
 
-### VS Code ###
+# Crash dumps
+erl_crash.dump
+
+# Archive artifacts
+*.ez
+
+# Hex packages
+*.tar.gz
+
+# Node.js/npm dependencies (if using assets with Node.js)
+node_modules/
+
+# Editor/IDE specific files (examples)
+.idea/
 .vscode/
-
-**/node_modules
-target
+*.swp
+*~
