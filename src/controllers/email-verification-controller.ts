@@ -17,7 +17,7 @@ export class EmailVerificationController extends BaseController {
       ]),
     );
     const subject = 'Email Verification Code';
-    const { data, error } = await this.sendNoReplyEmail(requestBody.recipientEmail, subject, html);
+    const { error } = await this.sendNoReplyEmail(requestBody.recipientEmail, subject, html);
     if (error) throw new Error(`Resend Error: ${error.name} - ${error.message}`);
 
     return {
