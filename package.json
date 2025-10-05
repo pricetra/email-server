@@ -22,10 +22,10 @@
   "homepage": "https://github.com/pricetra/email-server#readme",
   "description": "",
   "dependencies": {
-    "@sendgrid/mail": "^8.1.6",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
+    "resend": "^6.1.2",
     "swagger-ui-express": "^5.0.1",
     "tsoa": "^6.6.0",
     "typescript": "^5.9.3"

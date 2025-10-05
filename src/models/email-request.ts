@@ -3,7 +3,7 @@ export type EmailRequest = {
 }
 
 export type EmailResponse = {
-  status: string;
+  status: number;
   content: string;
   recipientEmail: string;
   subject: string;

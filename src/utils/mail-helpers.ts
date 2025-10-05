@@ -15,17 +15,3 @@ export function fillTemplateVariables(template: string, variableToValueMap: Map<
   }
   return result;
 }
-
-export async function sendNoReplyEmail(recipientEmail: string, subject: string, html: string): Promise<[sendgridMail.ClientResponse, {}]> {
-  return sendgridMail.send({
-    from: {
-      name: "Pricetra",
-      email: 'no-reply@pricetra.com'
-    },
-    to: {
-      email: recipientEmail,
-    },
-    subject,
-    html,
-  })
-}

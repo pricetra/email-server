@@ -6,17 +6,15 @@ import swaggerUi from 'swagger-ui-express';
 import fs from 'fs'
 import jwtAuth from './middleware/jwt-auth.js';
 import { RegisterRoutes } from './routes/routes.js';
-import sendgridMail from '@sendgrid/mail';
+import { ValidateError } from 'tsoa';
 
 dotenv.config({ path: '.env' })
 
 const JWT_KEY = process.env.JWT_KEY;
 if (!JWT_KEY) throw new Error('JWT_KEY required')
 
-const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY;
-if (!SENDGRID_API_KEY) throw new Error('SENDGRID_API_KEY, required');
-
-sendgridMail.setApiKey(SENDGRID_API_KEY)
+const RESEND_API_KEY = process.env.RESEND_API_KEY;
+if (!RESEND_API_KEY) throw new Error('RESEND_API_KEY required');
 
 const app = express()
 const port = 3001
@@ -25,7 +23,7 @@ const port = 3001
 app.use(express.json());
 
 if (process.env.ENV !== 'production') {
-  const swaggerPath = path.join(__dirname, "openapi", "openapi.json");
+  const swaggerPath = path.join(__dirname, "openapi", "swagger.json");
   if (fs.existsSync(swaggerPath)) {
     const swaggerDoc = JSON.parse(fs.readFileSync(swaggerPath, "utf-8"));
     app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDoc));
