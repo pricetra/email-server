@@ -12,18 +12,29 @@ const port = 3001
 
 app.use((req, res, next) => {
   const authValue = req.headers.authorization
-  if (!authValue) throw new Error('unauthorized');
+  if (!authValue) {
+    res.status(401).json({ message: 'unauthorized' });
+    return next();
+  }
 
   const parsedAuthValue = authValue.split(' ');
-  if (parsedAuthValue.length !== 2 || parsedAuthValue.at(0) !== 'Bearer') throw new Error('unauthorized');
+  if (parsedAuthValue.length !== 2 || parsedAuthValue.at(0) !== 'Bearer') {
+    res.status(401).json({ message: 'unauthorized' });
+    return next();
+  }
 
   const jwt = parsedAuthValue.at(1)!;
-  if (jsonwebtoken.verify(jwt, JWT_KEY)) { }
+  try {
+    jsonwebtoken.verify(jwt, JWT_KEY)
+    return next();
+  } catch {
+    res.status(401).json({ message: 'unauthorized' });
+  }
   return next();
 })
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send({ message: 'Hello World!' })
 })
 
 app.listen(port, () => {
