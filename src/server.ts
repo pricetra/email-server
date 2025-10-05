@@ -34,7 +34,24 @@ if (process.env.ENV !== 'production') {
 
 if (process.env.ENV === 'production') app.use(jwtAuth)
 
-RegisterRoutes(app)
+RegisterRoutes(app);
+
+app.use((err: unknown, req: express.Request, res: express.Response, next: express.NextFunction) => {
+  if (err instanceof ValidateError) {
+    return res.status(422).json({
+      message: 'Validation Failed',
+      details: err?.fields,
+    });
+  }
+
+  if (err instanceof Error) {
+    return res.status(500).json({
+      message: err.message,
+    });
+  }
+
+  res.status(500).json({ message: 'Internal Server Error' });
+});
 
 app.listen(port, () => {
   console.log(`🚀 Email service started at: http://localhost:${port}`)
