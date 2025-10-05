@@ -1,0 +1,26 @@
+{
+  "entryFile": "src/server.ts",
+  "noImplicitAdditionalProperties": "throw-on-extras",
+  "controllerPathGlobs": [
+    "src/controllers/**/*.ts"
+  ],
+  "spec": {
+    "outputDirectory": "src/openapi",
+    "specVersion": 3,
+    "name": "Pricetra Email API Service",
+    "description": "API documentation for the Pricetra Email API Service",
+    "version": "1.0",
+    "basePath": "/",
+    "specMerging": "recursive",
+    "securityDefinitions": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "routes": {
+    "routesDir": "src/routes"
+  }
+}
