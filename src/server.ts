@@ -6,11 +6,17 @@ import swaggerUi from 'swagger-ui-express';
 import fs from 'fs'
 import jwtAuth from './middleware/jwt-auth.js';
 import { RegisterRoutes } from './routes/routes.js';
+import sendgridMail from '@sendgrid/mail';
 
 dotenv.config({ path: '.env' })
 
 const JWT_KEY = process.env.JWT_KEY;
 if (!JWT_KEY) throw new Error('JWT_KEY required')
+
+const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY;
+if (!SENDGRID_API_KEY) throw new Error('SENDGRID_API_KEY, required');
+
+sendgridMail.setApiKey(SENDGRID_API_KEY)
 
 const app = express()
 const port = 3001
@@ -31,5 +37,5 @@ app.use(jwtAuth)
 RegisterRoutes(app)
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`🚀 Email service started at: http://localhost:${port}`)
 })
