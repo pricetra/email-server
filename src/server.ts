@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import swaggerUi from 'swagger-ui-express';
 import fs from 'fs'
+import jwtAuth from './middleware/jwt-auth.js';
 
 dotenv.config({ path: '.env' })
 
@@ -24,28 +25,7 @@ if (process.env.ENV !== 'production') {
   }
 }
 
-app.use((req, res, next) => {
-  const authValue = req.headers.authorization
-  if (!authValue) {
-    res.status(401).json({ message: 'unauthorized' });
-    return next();
-  }
-
-  const parsedAuthValue = authValue.split(' ');
-  if (parsedAuthValue.length !== 2 || parsedAuthValue.at(0) !== 'Bearer') {
-    res.status(401).json({ message: 'unauthorized' });
-    return next();
-  }
-
-  const jwt = parsedAuthValue.at(1)!;
-  try {
-    jsonwebtoken.verify(jwt, JWT_KEY)
-    return next();
-  } catch {
-    res.status(401).json({ message: 'unauthorized' });
-  }
-  return next();
-})
+app.use(jwtAuth)
 
 app.get('/', (req, res) => {
   res.send({ message: 'Hello World!' })
