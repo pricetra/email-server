@@ -19,7 +19,8 @@
 						"type": "string"
 					},
 					"status": {
-						"type": "string"
+						"type": "number",
+						"format": "double"
 					}
 				},
 				"required": [
@@ -29,6 +30,67 @@
 					"status"
 				],
 				"type": "object"
+			},
+			"PasswordResetResponse": {
+				"allOf": [
+					{
+						"$ref": "#/components/schemas/EmailResponse"
+					},
+					{
+						"properties": {
+							"avatarUrl": {
+								"type": "string"
+							},
+							"fullName": {
+								"type": "string"
+							},
+							"code": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"fullName",
+							"code"
+						],
+						"type": "object"
+					}
+				]
+			},
+			"EmailRequest": {
+				"properties": {
+					"recipientEmail": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"recipientEmail"
+				],
+				"type": "object"
+			},
+			"PasswordResetRequest": {
+				"allOf": [
+					{
+						"$ref": "#/components/schemas/EmailRequest"
+					},
+					{
+						"properties": {
+							"avatarUrl": {
+								"type": "string"
+							},
+							"fullName": {
+								"type": "string"
+							},
+							"code": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"fullName",
+							"code"
+						],
+						"type": "object"
+					}
+				]
 			},
 			"EmailVerificationResponse": {
 				"allOf": [
@@ -51,17 +113,6 @@
 						"type": "object"
 					}
 				]
-			},
-			"EmailRequest": {
-				"properties": {
-					"recipientEmail": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"recipientEmail"
-				],
-				"type": "object"
 			},
 			"EmailVerificationRequest": {
 				"allOf": [
@@ -106,6 +157,38 @@
 		}
 	},
 	"paths": {
+		"/password-reset": {
+			"post": {
+				"operationId": "SendPasswordResetCode",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/PasswordResetResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"password-reset-controller"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/PasswordResetRequest"
+							}
+						}
+					}
+				}
+			}
+		},
 		"/email-verification": {
 			"post": {
 				"operationId": "SendEmailVerificationCode",

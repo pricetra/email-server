@@ -4,7 +4,7 @@ import { fillTemplateVariables, getEmailTemplate } from "../utils/mail-helpers";
 import { BaseController } from "./controller";
 
 @Route("password-reset")
-  @Tags("password-reset-controller")
+@Tags("password-reset-controller")
 export class PasswordResetController extends BaseController {
   @Post()
   @SuccessResponse("200", "OK")

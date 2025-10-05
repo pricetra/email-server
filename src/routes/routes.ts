@@ -4,6 +4,8 @@
 import type { TsoaRoute } from '@tsoa/runtime';
 import {  fetchMiddlewares, ExpressTemplateService } from '@tsoa/runtime';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { PasswordResetController } from './../controllers/password-reset-controller';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { EmailVerificationController } from './../controllers/email-verification-controller';
 import type { Request as ExRequest, Response as ExResponse, RequestHandler, Router } from 'express';
 
@@ -14,17 +16,27 @@ import type { Request as ExRequest, Response as ExResponse, RequestHandler, Rout
 const models: TsoaRoute.Models = {
     "EmailResponse": {
         "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"subject":{"dataType":"string","required":true},"recipientEmail":{"dataType":"string","required":true},"content":{"dataType":"string","required":true},"status":{"dataType":"string","required":true}},"validators":{}},
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"subject":{"dataType":"string","required":true},"recipientEmail":{"dataType":"string","required":true},"content":{"dataType":"string","required":true},"status":{"dataType":"double","required":true}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "EmailVerificationResponse": {
+    "PasswordResetResponse": {
         "dataType": "refAlias",
-        "type": {"dataType":"intersection","subSchemas":[{"ref":"EmailResponse"},{"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string","required":true},"code":{"dataType":"string","required":true}}}],"validators":{}},
+        "type": {"dataType":"intersection","subSchemas":[{"ref":"EmailResponse"},{"dataType":"nestedObjectLiteral","nestedProperties":{"avatarUrl":{"dataType":"string"},"fullName":{"dataType":"string","required":true},"code":{"dataType":"string","required":true}}}],"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "EmailRequest": {
         "dataType": "refAlias",
         "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"recipientEmail":{"dataType":"string","required":true}},"validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "PasswordResetRequest": {
+        "dataType": "refAlias",
+        "type": {"dataType":"intersection","subSchemas":[{"ref":"EmailRequest"},{"dataType":"nestedObjectLiteral","nestedProperties":{"avatarUrl":{"dataType":"string"},"fullName":{"dataType":"string","required":true},"code":{"dataType":"string","required":true}}}],"validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "EmailVerificationResponse": {
+        "dataType": "refAlias",
+        "type": {"dataType":"intersection","subSchemas":[{"ref":"EmailResponse"},{"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string","required":true},"code":{"dataType":"string","required":true}}}],"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "EmailVerificationRequest": {
@@ -49,6 +61,36 @@ export function RegisterRoutes(app: Router) {
 
 
     
+        const argsPasswordResetController_sendPasswordResetCode: Record<string, TsoaRoute.ParameterSchema> = {
+                body: {"in":"body","name":"body","required":true,"ref":"PasswordResetRequest"},
+        };
+        app.post('/password-reset',
+            ...(fetchMiddlewares<RequestHandler>(PasswordResetController)),
+            ...(fetchMiddlewares<RequestHandler>(PasswordResetController.prototype.sendPasswordResetCode)),
+
+            async function PasswordResetController_sendPasswordResetCode(request: ExRequest, response: ExResponse, next: any) {
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args: argsPasswordResetController_sendPasswordResetCode, request, response });
+
+                const controller = new PasswordResetController();
+
+              await templateService.apiHandler({
+                methodName: 'sendPasswordResetCode',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         const argsEmailVerificationController_sendEmailVerificationCode: Record<string, TsoaRoute.ParameterSchema> = {
                 requestBody: {"in":"body","name":"requestBody","required":true,"ref":"EmailVerificationRequest"},
         };
