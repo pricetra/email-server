@@ -9,12 +9,12 @@ export default function jwtAuth(req: Request, res: Response, next: NextFunction)
   }
 
   const parsedAuthValue = authValue.split(' ');
-  if (parsedAuthValue.length !== 2 || parsedAuthValue.at(0) !== 'Bearer') {
+  if (parsedAuthValue.length !== 2 || parsedAuthValue[0] !== 'Bearer') {
     res.status(401).json({ message: 'unauthorized' });
     return next();
   }
 
-  const jwt = parsedAuthValue.at(1)!;
+  const jwt = parsedAuthValue[1];
   try {
     jsonwebtoken.verify(jwt, process.env.JWT_KEY!)
     return next();

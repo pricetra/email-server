@@ -5,6 +5,7 @@ import path from 'path';
 import swaggerUi from 'swagger-ui-express';
 import fs from 'fs'
 import jwtAuth from './middleware/jwt-auth.js';
+import { RegisterRoutes } from './routes/routes.js';
 
 dotenv.config({ path: '.env' })
 
@@ -27,9 +28,7 @@ if (process.env.ENV !== 'production') {
 
 app.use(jwtAuth)
 
-app.get('/', (req, res) => {
-  res.send({ message: 'Hello World!' })
-})
+RegisterRoutes(app)
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
