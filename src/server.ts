@@ -10,6 +10,9 @@ if (!JWT_KEY) throw new Error('JWT_KEY required')
 const app = express()
 const port = 3001
 
+// TODO: enable cors
+app.use(express.json());
+
 app.use((req, res, next) => {
   const authValue = req.headers.authorization
   if (!authValue) {
