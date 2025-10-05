@@ -23,11 +23,12 @@ const port = 3001
 app.use(express.json());
 
 if (process.env.ENV !== 'production') {
-  const swaggerPath = path.join(__dirname, "openapi", "swagger.json");
-  if (fs.existsSync(swaggerPath)) {
-    const swaggerDoc = JSON.parse(fs.readFileSync(swaggerPath, "utf-8"));
-    app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDoc));
-  }
+  const swaggerPath = path.join(process.cwd(), 'dist', "swagger.json");
+  const swaggerDoc = JSON.parse(fs.readFileSync(swaggerPath, "utf-8"));
+  app.get("/api-docs", (_req, res) => {
+    res.status(200).json(swaggerDoc);
+  });
+  app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 }
 
 if (process.env.ENV === 'production') app.use(jwtAuth)

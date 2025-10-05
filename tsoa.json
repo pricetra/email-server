@@ -5,7 +5,7 @@
     "src/controllers/**/*.ts"
   ],
   "spec": {
-    "outputDirectory": "src/openapi",
+    "outputDirectory": "dist",
     "specVersion": 3,
     "name": "Pricetra Email API Service",
     "description": "API documentation for the Pricetra Email API Service",
