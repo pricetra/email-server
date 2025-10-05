@@ -1,5 +1,5 @@
-import { Body, Controller, Post, Get, Path, Query, Route, Tags, SuccessResponse } from "tsoa";
-import type { EmailVerificationRequest, EmailVerificationResponse } from "../models/email-verification.js";
+import { Body, Post, Route, Tags, SuccessResponse, Controller } from "tsoa";
+import type { EmailVerificationRequest, EmailVerificationResponse } from "../models/email-verification";
 
 @Route("email-verification")
 @Tags("email-verification-controller")
