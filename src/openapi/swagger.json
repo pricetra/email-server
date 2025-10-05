@@ -1,0 +1,147 @@
+{
+	"openapi": "3.0.0",
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"EmailResponse": {
+				"properties": {
+					"subject": {
+						"type": "string"
+					},
+					"recipientEmail": {
+						"type": "string"
+					},
+					"content": {
+						"type": "string"
+					},
+					"status": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"subject",
+					"recipientEmail",
+					"content",
+					"status"
+				],
+				"type": "object"
+			},
+			"EmailVerificationResponse": {
+				"allOf": [
+					{
+						"$ref": "#/components/schemas/EmailResponse"
+					},
+					{
+						"properties": {
+							"name": {
+								"type": "string"
+							},
+							"code": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"name",
+							"code"
+						],
+						"type": "object"
+					}
+				]
+			},
+			"EmailRequest": {
+				"properties": {
+					"recipientEmail": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"recipientEmail"
+				],
+				"type": "object"
+			},
+			"EmailVerificationRequest": {
+				"allOf": [
+					{
+						"$ref": "#/components/schemas/EmailRequest"
+					},
+					{
+						"properties": {
+							"name": {
+								"type": "string"
+							},
+							"code": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"name",
+							"code"
+						],
+						"type": "object"
+					}
+				]
+			}
+		},
+		"securitySchemes": {
+			"bearerAuth": {
+				"type": "http",
+				"scheme": "bearer",
+				"bearerFormat": "JWT"
+			}
+		}
+	},
+	"info": {
+		"title": "Pricetra Email API Service",
+		"version": "1.0",
+		"description": "API documentation for the Pricetra Email API Service",
+		"license": {
+			"name": "ISC"
+		},
+		"contact": {
+			"name": "Ayaan Siddiqui"
+		}
+	},
+	"paths": {
+		"/email-verification": {
+			"post": {
+				"operationId": "SendEmailVerificationCode",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/EmailVerificationResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"email-verification-controller"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/EmailVerificationRequest"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
+}

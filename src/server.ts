@@ -32,7 +32,7 @@ if (process.env.ENV !== 'production') {
   }
 }
 
-app.use(jwtAuth)
+if (process.env.ENV === 'production') app.use(jwtAuth)
 
 RegisterRoutes(app)
 
