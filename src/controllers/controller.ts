@@ -16,4 +16,13 @@ export class BaseController extends Controller {
       html,
     })
   }
+
+  public async sendHelloEmail(recipientEmail: string, subject: string, html: string): Promise<CreateEmailResponse> {
+    return this.resendClient.emails.send({
+      from: `Pricetra <hello@pricetra.com>`,
+      to: recipientEmail,
+      subject,
+      html,
+    })
+  }
 }
