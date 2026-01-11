@@ -21,3 +21,21 @@ export type JoinStoreInviteResponse = EmailResponse & {
   accept: string;
   decline: string;
 }
+
+export type InviteAcceptedRequest = EmailRequest & {
+  store: string;
+  storeSlug: string;
+  storeLogo: string;
+  role: string;
+  invitee: string;
+  inviter: string;
+}
+
+export type InviteAcceptedResponse = EmailResponse & {
+  store: string;
+  storeSlug: string;
+  storeLogo: string;
+  role: string;
+  invitee: string;
+  inviter: string;
+}

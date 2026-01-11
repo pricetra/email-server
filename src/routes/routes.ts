@@ -48,6 +48,16 @@ const models: TsoaRoute.Models = {
         "type": {"dataType":"intersection","subSchemas":[{"ref":"EmailRequest"},{"dataType":"nestedObjectLiteral","nestedProperties":{"decline":{"dataType":"string","required":true},"accept":{"dataType":"string","required":true},"inviter":{"dataType":"string","required":true},"invitee":{"dataType":"string","required":true},"role":{"dataType":"string","required":true},"storeLogo":{"dataType":"string","required":true},"storeSlug":{"dataType":"string","required":true},"store":{"dataType":"string","required":true}}}],"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "InviteAcceptedResponse": {
+        "dataType": "refAlias",
+        "type": {"dataType":"intersection","subSchemas":[{"ref":"EmailResponse"},{"dataType":"nestedObjectLiteral","nestedProperties":{"inviter":{"dataType":"string","required":true},"invitee":{"dataType":"string","required":true},"role":{"dataType":"string","required":true},"storeLogo":{"dataType":"string","required":true},"storeSlug":{"dataType":"string","required":true},"store":{"dataType":"string","required":true}}}],"validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "InviteAcceptedRequest": {
+        "dataType": "refAlias",
+        "type": {"dataType":"intersection","subSchemas":[{"ref":"EmailRequest"},{"dataType":"nestedObjectLiteral","nestedProperties":{"inviter":{"dataType":"string","required":true},"invitee":{"dataType":"string","required":true},"role":{"dataType":"string","required":true},"storeLogo":{"dataType":"string","required":true},"storeSlug":{"dataType":"string","required":true},"store":{"dataType":"string","required":true}}}],"validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "PasswordResetResponse": {
         "dataType": "refAlias",
         "type": {"dataType":"intersection","subSchemas":[{"ref":"EmailResponse"},{"dataType":"nestedObjectLiteral","nestedProperties":{"avatarUrl":{"dataType":"string"},"fullName":{"dataType":"string","required":true},"code":{"dataType":"string","required":true}}}],"validators":{}},
@@ -134,6 +144,36 @@ export function RegisterRoutes(app: Router) {
 
               await templateService.apiHandler({
                 methodName: 'sendJoinStoreRequestEmail',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsStoreUserController_inviteAcceptedEmail: Record<string, TsoaRoute.ParameterSchema> = {
+                body: {"in":"body","name":"body","required":true,"ref":"InviteAcceptedRequest"},
+        };
+        app.post('/store-user/invite-accepted-email',
+            ...(fetchMiddlewares<RequestHandler>(StoreUserController)),
+            ...(fetchMiddlewares<RequestHandler>(StoreUserController.prototype.inviteAcceptedEmail)),
+
+            async function StoreUserController_inviteAcceptedEmail(request: ExRequest, response: ExResponse, next: any) {
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args: argsStoreUserController_inviteAcceptedEmail, request, response });
+
+                const controller = new StoreUserController();
+
+              await templateService.apiHandler({
+                methodName: 'inviteAcceptedEmail',
                 controller,
                 response,
                 next,
