@@ -6,6 +6,8 @@ import {  fetchMiddlewares, ExpressTemplateService } from '@tsoa/runtime';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { WelcomeController } from './../controllers/welcome-controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { StoreUserController } from './../controllers/store-user-controller';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { PasswordResetController } from './../controllers/password-reset-controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { EmailVerificationController } from './../controllers/email-verification-controller';
@@ -34,6 +36,16 @@ const models: TsoaRoute.Models = {
     "WelcomeRequest": {
         "dataType": "refAlias",
         "type": {"dataType":"intersection","subSchemas":[{"ref":"EmailRequest"},{"dataType":"nestedObjectLiteral","nestedProperties":{"fullName":{"dataType":"string","required":true}}}],"validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "JoinStoreInviteResponse": {
+        "dataType": "refAlias",
+        "type": {"dataType":"intersection","subSchemas":[{"ref":"EmailResponse"},{"dataType":"nestedObjectLiteral","nestedProperties":{"decline":{"dataType":"string","required":true},"accept":{"dataType":"string","required":true},"inviter":{"dataType":"string","required":true},"invitee":{"dataType":"string","required":true},"role":{"dataType":"string","required":true},"storeLogo":{"dataType":"string","required":true},"storeSlug":{"dataType":"string","required":true},"store":{"dataType":"string","required":true}}}],"validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "JoinStoreInviteRequest": {
+        "dataType": "refAlias",
+        "type": {"dataType":"intersection","subSchemas":[{"ref":"EmailRequest"},{"dataType":"nestedObjectLiteral","nestedProperties":{"decline":{"dataType":"string","required":true},"accept":{"dataType":"string","required":true},"inviter":{"dataType":"string","required":true},"invitee":{"dataType":"string","required":true},"role":{"dataType":"string","required":true},"storeLogo":{"dataType":"string","required":true},"storeSlug":{"dataType":"string","required":true},"store":{"dataType":"string","required":true}}}],"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "PasswordResetResponse": {
@@ -92,6 +104,36 @@ export function RegisterRoutes(app: Router) {
 
               await templateService.apiHandler({
                 methodName: 'sendWelcomeEmail',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsStoreUserController_sendJoinStoreRequestEmail: Record<string, TsoaRoute.ParameterSchema> = {
+                body: {"in":"body","name":"body","required":true,"ref":"JoinStoreInviteRequest"},
+        };
+        app.post('/store-user/send-join-store-request-email',
+            ...(fetchMiddlewares<RequestHandler>(StoreUserController)),
+            ...(fetchMiddlewares<RequestHandler>(StoreUserController.prototype.sendJoinStoreRequestEmail)),
+
+            async function StoreUserController_sendJoinStoreRequestEmail(request: ExRequest, response: ExResponse, next: any) {
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args: argsStoreUserController_sendJoinStoreRequestEmail, request, response });
+
+                const controller = new StoreUserController();
+
+              await templateService.apiHandler({
+                methodName: 'sendJoinStoreRequestEmail',
                 controller,
                 response,
                 next,
