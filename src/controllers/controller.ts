@@ -8,6 +8,15 @@ export class BaseController extends Controller {
     this.resendClient = new Resend(process.env.RESEND_API_KEY!);
   }
 
+  public async sendNoReplyTextEmail(recipientEmail: string, subject: string, text: string): Promise<CreateEmailResponse> {
+    return this.resendClient.emails.send({
+      from: `Pricetra <no-reply@pricetra.com>`,
+      to: recipientEmail,
+      subject,
+      text,
+    })
+  }
+
   public async sendNoReplyEmail(recipientEmail: string, subject: string, html: string): Promise<CreateEmailResponse> {
     return this.resendClient.emails.send({
       from: `Pricetra <no-reply@pricetra.com>`,

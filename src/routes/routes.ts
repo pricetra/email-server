@@ -8,6 +8,8 @@ import { WelcomeController } from './../controllers/welcome-controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { StoreUserController } from './../controllers/store-user-controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { SimpleEmailController } from './../controllers/simple-email-controller';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { PasswordResetController } from './../controllers/password-reset-controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { EmailVerificationController } from './../controllers/email-verification-controller';
@@ -56,6 +58,16 @@ const models: TsoaRoute.Models = {
     "InviteAcceptedRequest": {
         "dataType": "refAlias",
         "type": {"dataType":"intersection","subSchemas":[{"ref":"EmailRequest"},{"dataType":"nestedObjectLiteral","nestedProperties":{"inviter":{"dataType":"string","required":true},"invitee":{"dataType":"string","required":true},"role":{"dataType":"string","required":true},"storeLogo":{"dataType":"string","required":true},"storeSlug":{"dataType":"string","required":true},"store":{"dataType":"string","required":true}}}],"validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "SimpleEmailResponse": {
+        "dataType": "refAlias",
+        "type": {"dataType":"intersection","subSchemas":[{"ref":"EmailResponse"},{"dataType":"nestedObjectLiteral","nestedProperties":{"message":{"dataType":"string","required":true},"subject":{"dataType":"string","required":true}}}],"validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "SimpleEmailRequest": {
+        "dataType": "refAlias",
+        "type": {"dataType":"intersection","subSchemas":[{"ref":"EmailRequest"},{"dataType":"nestedObjectLiteral","nestedProperties":{"message":{"dataType":"string","required":true},"subject":{"dataType":"string","required":true}}}],"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "PasswordResetResponse": {
@@ -174,6 +186,36 @@ export function RegisterRoutes(app: Router) {
 
               await templateService.apiHandler({
                 methodName: 'inviteAcceptedEmail',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsSimpleEmailController_sendSimpleEmail: Record<string, TsoaRoute.ParameterSchema> = {
+                requestBody: {"in":"body","name":"requestBody","required":true,"ref":"SimpleEmailRequest"},
+        };
+        app.post('/simple-email',
+            ...(fetchMiddlewares<RequestHandler>(SimpleEmailController)),
+            ...(fetchMiddlewares<RequestHandler>(SimpleEmailController.prototype.sendSimpleEmail)),
+
+            async function SimpleEmailController_sendSimpleEmail(request: ExRequest, response: ExResponse, next: any) {
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args: argsSimpleEmailController_sendSimpleEmail, request, response });
+
+                const controller = new SimpleEmailController();
+
+              await templateService.apiHandler({
+                methodName: 'sendSimpleEmail',
                 controller,
                 response,
                 next,

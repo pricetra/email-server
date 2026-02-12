@@ -1,4 +1,3 @@
-
 import { Body, Post, Route, Tags, SuccessResponse } from "tsoa";
 import { fillTemplateVariables, getEmailTemplate } from "../utils/mail-helpers";
 import { BaseController } from "./controller";
